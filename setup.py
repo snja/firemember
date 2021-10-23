@@ -7,10 +7,10 @@ setup(
     description='Lisensi aplikasi menggunakan realtime database dari firebase',
     author='santo',
     author_email='santo.lpu@gmail.com',
+    url='',
     license='MIT',
-    install_requires=['pycryptodome','requests'],
+    install_requires=['pycryptodome', 'requests'],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
     test_suite='test',
 )
-
