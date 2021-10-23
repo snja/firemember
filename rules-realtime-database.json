@@ -1,0 +1,40 @@
+{
+  "rules": {
+    "lisensi": {
+      "$key": {
+        "device": {
+          ".validate": "newData.hasChild('id') && root.child('lisensi').child($key).child('expired').val()>now",
+          ".write": "(!data.exists() && !root.child('lisensi').child($key).hasChild('block')) || (!newData.exists() && root.child('lisensi').child($key).child('uid').val()===auth.uid)",
+          ".read": "root.child('lisensi').child($key).child('expired').val()>now && !root.child('lisensi').child($key).hasChild('block')"
+        },
+        ".read": "false"
+      },
+      ".read": "root.child('admin').hasChild(auth.uid)",
+      ".write": "root.child('admin').hasChild(auth.uid)"
+    },
+    "users": {
+      "$auth": {
+        ".read": "$auth===auth.uid || root.child('admin').hasChild(auth.uid)",
+        ".write": "$auth===auth.uid || root.child('admin').hasChild(auth.uid)",
+        "lisensi": {
+          ".write": "root.child('users').hasChild(auth.uid)"
+        }
+      },
+      ".read": "root.child('admin').hasChild(auth.uid)",
+      ".write": "root.child('admin').hasChild(auth.uid)"
+    },
+    "admin": {
+      "$uid": {
+        ".read": "$uid === auth.uid"
+      }
+    },
+    "app": {
+      ".read": true,
+      ".write": false
+    },
+    "pending": {
+      ".read": "root.child('admin').hasChild(auth.uid)",
+      ".write": "root.child('admin').hasChild(auth.uid)"
+    }
+  }
+}
